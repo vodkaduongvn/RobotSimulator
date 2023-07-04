@@ -10,6 +10,8 @@
             string filePath = "commands.txt"; // Path to the commands file
 
             simulator.ProcessCommands(filePath);
+
+            Thread.Sleep(30000);
         }
     }
 }
