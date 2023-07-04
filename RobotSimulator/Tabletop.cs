@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace RobotSimulator
 {
-    public class Table
+    public interface ITabletop
+    {
+        bool IsValidPosition(int x, int y);
+    }
+
+    public class Tabletop:ITabletop
     {
         public bool IsValidPosition(int x, int y)
         {

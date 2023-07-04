@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\WORK\\Consoles\\Robot\\RobotSimulator\\RobotSimulator\\RobotSimulator.csproj",
+      "projectUniqueName": "C:\\WORK\\ChaimpionData\\RobotSimulator\\RobotSimulator\\RobotSimulator.csproj",
       "projectName": "RobotSimulator",
-      "projectPath": "C:\\WORK\\Consoles\\Robot\\RobotSimulator\\RobotSimulator\\RobotSimulator.csproj",
+      "projectPath": "C:\\WORK\\ChaimpionData\\RobotSimulator\\RobotSimulator\\RobotSimulator.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "C:\\WORK\\Consoles\\Robot\\RobotSimulator\\RobotSimulator\\obj\\",
+      "outputPath": "C:\\WORK\\ChaimpionData\\RobotSimulator\\RobotSimulator\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",

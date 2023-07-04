@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RobotSimulator
 {
-    public class Command
+    public class CommandModel
     {
         public string Type { get; set; }
         public int X { get; set; }

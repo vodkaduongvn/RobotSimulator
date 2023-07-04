@@ -6,7 +6,19 @@ using System.Threading.Tasks;
 
 namespace RobotSimulator
 {
-    public class Robot
+    public interface IRobot
+    {
+        public int X { get; set; }
+        public int Y { get; set; }
+        public string Facing { get; set; }
+
+        void Move();
+        void RotateLeft();
+        void RotateRight();
+        void Report();
+    }
+
+    public class Robot: IRobot
     {
         public int X { get; set; }
         public int Y { get; set; }

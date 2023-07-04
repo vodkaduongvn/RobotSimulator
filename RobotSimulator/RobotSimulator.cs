@@ -8,13 +8,13 @@ namespace RobotSimulator
 {
     public class RobotSimulator
     {
-        private Robot _robot;
-        private Table _table;
+        private IRobot _robot;
+        private ITabletop _tabletop;
 
-        public RobotSimulator()
+        public RobotSimulator(IRobot robot, ITabletop tabletop)
         {
-            _robot = new Robot();
-            _table = new Table();
+            _robot = robot;
+            _tabletop = tabletop;
         }
 
         public void ProcessCommands(string filePath)
@@ -23,7 +23,7 @@ namespace RobotSimulator
 
             foreach (string line in lines)
             {
-                Command command = ParseCommand(line);
+                CommandModel command = ParseCommand(line);
 
                 if (command == null)
                     continue; // Ignore invalid commands
@@ -32,14 +32,14 @@ namespace RobotSimulator
             }
         }
 
-        private Command ParseCommand(string line)
+        private CommandModel ParseCommand(string line)
         {
             string[] parts = line.Split(' ');
 
             if (parts.Length == 0)
                 return null;
 
-            Command command = new Command { Type = parts[0] };
+            CommandModel command = new CommandModel { Type = parts[0] };
 
             if (command.Type == "PLACE" && parts.Length == 2)
             {
@@ -62,7 +62,7 @@ namespace RobotSimulator
             return command;
         }
 
-        private void ExecuteCommand(Command command)
+        private void ExecuteCommand(CommandModel command)
         {
             switch (command.Type)
             {
@@ -86,7 +86,7 @@ namespace RobotSimulator
 
         private void PlaceRobot(int x, int y, string facing)
         {
-            if (_table.IsValidPosition(x, y))
+            if (_tabletop.IsValidPosition(x, y))
             {
                 _robot.X = x;
                 _robot.Y = y;
@@ -96,7 +96,7 @@ namespace RobotSimulator
 
         private void MoveRobot()
         {
-            if (_table.IsValidPosition(_robot.X, _robot.Y))
+            if (_tabletop.IsValidPosition(_robot.X, _robot.Y))
             {
                 _robot.Move();
             }
