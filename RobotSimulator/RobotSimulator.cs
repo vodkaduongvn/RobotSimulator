@@ -19,51 +19,30 @@ namespace RobotSimulator
 
         public void ProcessCommands(string filePath)
         {
-            string[] lines = File.ReadAllLines(filePath);
-            var cmds = new List<CommandModel>();
+            var commandBlocks = ConvertCommandFileToCommandBlocksModel(filePath);
 
-            for (int i = 0; i < lines.Length; i++)
+            foreach (var cmdBlock in commandBlocks)
             {
-                var place = lines[i].Split(' ');
-                if (place[0] != "PLACE" && lines[i].Split(',').Count() > 1)
+                var isValidCommand = false;
+
+                foreach (var command in cmdBlock.Commands) 
                 {
-                    var j = i;
-                    while (!string.IsNullOrEmpty(lines[j]))
+                    if (command.Type != "PLACE" && !isValidCommand)
                     {
-                        var cmd = ParseCommand(lines[j]);
-                        cmd.ValidCommand = false;
-                        if (!string.IsNullOrEmpty(lines[j]))
+                        if (!string.IsNullOrEmpty(command.Type))
                         {
-                            cmds.Add(cmd);
+                            Console.WriteLine($"Invalid command {command.Type}. PLACE command must be executed first.");
                         }
-                        j++;
-                        i = j;
+                        else
+                        {
+                            Console.WriteLine($"PLACE command was empty.");
+                        }
+                        break;
                     }
-                }
-                else
-                {
-                    if (!string.IsNullOrEmpty(lines[i]))
+                    else
                     {
-                        var c = ParseCommand(lines[i]);
-                        c.ValidCommand = true;
-                        cmds.Add(c);
-                    }
-                    
-                }
-            }
-
-            foreach (var cmd in cmds)
-            {
-
-                if (cmd.ValidCommand)
-                {
-                    ExecuteCommand(cmd);
-                }
-                else
-                {
-                    if (!cmd.ValidCommand && cmd.Type != "LEFT"  && cmd.Type != "RIGHT" && cmd.Type != "MOVE" && cmd.Type != "REPORT")
-                    {
-                        Console.WriteLine($"Invalid command {cmd.Type} {cmd.X} {cmd.Y} {cmd.Facing} sequence. PLACE command must be executed first.");
+                        isValidCommand = true;
+                        ExecuteCommand(command);
                     }
                 }
             }
@@ -152,6 +131,61 @@ namespace RobotSimulator
         private void ReportRobot()
         {
             _robot.Report();
+        }
+
+        private List<CommandBlock> ConvertCommandFileToCommandBlocksModel(string fileName)
+        {
+            string line = "";
+            var str = "";
+
+            using (StreamWriter writer = new StreamWriter(fileName, true))
+            {
+                writer.WriteLine(); // Append a line break at the bottom of the file
+                writer.WriteLine();
+            }
+
+            StreamReader file = new StreamReader(fileName);
+            var cmdList = new List<CommandBlock>();
+
+            while ((line = file.ReadLine()) != null)
+            {
+                line = line.Trim();
+                //if line is empty
+                //show total values until now
+                if (line == "")
+                {
+                    var cmdBlock = new CommandBlock();
+                    if (!string.IsNullOrEmpty(str))
+                    {
+                        var cmds = str.Split(';');
+                        foreach (var cmd in cmds)
+                        {
+                            cmdBlock.Commands.Add(ParseCommand(cmd));
+
+                        }
+                        cmdList.Add(cmdBlock);
+                    }
+                    str = "";
+                    continue;
+                }
+                else
+                {
+                    //if first element, add here
+                    if (str != "")
+                    {
+                        str = str + ";" + line;
+                    }
+                    else
+                    {
+                        str = line;
+                    }
+
+                }
+            }
+
+            file.Close();
+
+            return cmdList;
         }
     }
 }

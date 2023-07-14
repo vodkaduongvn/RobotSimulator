@@ -1,10 +1,33 @@
 # RobotSimulator
+
 The .net core 6.0 console application for robot simulator.
 
-Runing CMD at the Application folder then run: dotnet build and dot run to run it or using VS 2022 to run it.
+Runing CMD at the Application folder then run: dotnet build and dotnet run to run it or using VS 2022 to run it.
 
 The commands.txt including some scenarios for testing.
 
-If the PLACE was not input, the following command can't be executed.
+NOTE: 
+  The commands in the file are isolated by break line, one block command is for each of scenario test.
 
-NOTE: anytime update the commands.txt, we should recompile the solution to make it run correctly!
+    Scenarios:
+
+        Successful: input fully
+            PLACE 0,0,NORTH
+            MOVE
+            REPORT
+            
+        Fail: missing PLACE command
+            MOVE
+            REPORT
+        
+        Fail: Wrong typing PLACE command
+            PLACESSS 0,0,NORTH
+            MOVE
+            REPORT
+
+        Fail: Wrong order PLACE command
+            MOVE
+            PLACE 0,0,NORTH
+            REPORT
+        
+  Anytime update the commands.txt, we should recompile the solution to make it run correctly!
