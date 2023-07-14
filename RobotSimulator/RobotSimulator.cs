@@ -63,7 +63,7 @@ namespace RobotSimulator
                 {
                     if (!cmd.ValidCommand && cmd.Type != "LEFT"  && cmd.Type != "RIGHT" && cmd.Type != "MOVE" && cmd.Type != "REPORT")
                     {
-                        Console.WriteLine($"Invalid command {cmd.Type} sequence. PLACE command must be executed first.");
+                        Console.WriteLine($"Invalid command {cmd.Type} {cmd.X} {cmd.Y} {cmd.Facing} sequence. PLACE command must be executed first.");
                     }
                 }
             }
