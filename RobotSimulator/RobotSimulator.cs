@@ -20,15 +20,52 @@ namespace RobotSimulator
         public void ProcessCommands(string filePath)
         {
             string[] lines = File.ReadAllLines(filePath);
+            var cmds = new List<CommandModel>();
 
-            foreach (string line in lines)
+            for (int i = 0; i < lines.Length; i++)
             {
-                CommandModel command = ParseCommand(line);
+                var place = lines[i].Split(' ');
+                if (place[0] != "PLACE" && lines[i].Split(',').Count() > 1)
+                {
+                    var j = i;
+                    while (!string.IsNullOrEmpty(lines[j]))
+                    {
+                        var cmd = ParseCommand(lines[j]);
+                        cmd.ValidCommand = false;
+                        if (!string.IsNullOrEmpty(lines[j]))
+                        {
+                            cmds.Add(cmd);
+                        }
+                        j++;
+                        i = j;
+                    }
+                }
+                else
+                {
+                    if (!string.IsNullOrEmpty(lines[i]))
+                    {
+                        var c = ParseCommand(lines[i]);
+                        c.ValidCommand = true;
+                        cmds.Add(c);
+                    }
+                    
+                }
+            }
 
-                if (command == null)
-                    continue; // Ignore invalid commands
+            foreach (var cmd in cmds)
+            {
 
-                ExecuteCommand(command);
+                if (cmd.ValidCommand)
+                {
+                    ExecuteCommand(cmd);
+                }
+                else
+                {
+                    if (!cmd.ValidCommand && cmd.Type != "LEFT"  && cmd.Type != "RIGHT" && cmd.Type != "MOVE" && cmd.Type != "REPORT")
+                    {
+                        Console.WriteLine($"Invalid command {cmd.Type} sequence. PLACE command must be executed first.");
+                    }
+                }
             }
         }
 

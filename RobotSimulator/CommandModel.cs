@@ -12,5 +12,6 @@ namespace RobotSimulator
         public int X { get; set; }
         public int Y { get; set; }
         public string Facing { get; set; }
+        public bool ValidCommand { get; set; }
     }
 }
