@@ -31,3 +31,5 @@ NOTE:
             REPORT
         
   Anytime update the commands.txt, we should recompile the solution to make it run correctly!
+
+Please let me know if I miss anything. Sorry for missed the error handling. Thanks you.
