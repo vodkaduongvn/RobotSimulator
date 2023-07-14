@@ -19,7 +19,7 @@ namespace RobotSimulator
 
         public void ProcessCommands(string filePath)
         {
-            var commandBlocks = ConvertCommandFileToCommandBlocksModel(filePath);
+            var commandBlocks = ParseCommandFileToCommandBlocksModel(filePath);
 
             foreach (var cmdBlock in commandBlocks)
             {
@@ -133,9 +133,8 @@ namespace RobotSimulator
             _robot.Report();
         }
 
-        private List<CommandBlock> ConvertCommandFileToCommandBlocksModel(string fileName)
+        private List<CommandBlock> ParseCommandFileToCommandBlocksModel(string fileName)
         {
-            string line = "";
             var str = "";
 
             using (StreamWriter writer = new StreamWriter(fileName, true))
@@ -145,13 +144,14 @@ namespace RobotSimulator
             }
 
             StreamReader file = new StreamReader(fileName);
-            var cmdList = new List<CommandBlock>();
+            var commandBlocks = new List<CommandBlock>();
 
+            string line;
             while ((line = file.ReadLine()) != null)
             {
                 line = line.Trim();
                 //if line is empty
-                //show total values until now
+                // parse line to model
                 if (line == "")
                 {
                     var cmdBlock = new CommandBlock();
@@ -161,9 +161,8 @@ namespace RobotSimulator
                         foreach (var cmd in cmds)
                         {
                             cmdBlock.Commands.Add(ParseCommand(cmd));
-
                         }
-                        cmdList.Add(cmdBlock);
+                        commandBlocks.Add(cmdBlock);
                     }
                     str = "";
                     continue;
@@ -171,7 +170,7 @@ namespace RobotSimulator
                 else
                 {
                     //if first element, add here
-                    if (str != "")
+                    if (!string.IsNullOrEmpty(str))
                     {
                         str = str + ";" + line;
                     }
@@ -179,13 +178,12 @@ namespace RobotSimulator
                     {
                         str = line;
                     }
-
                 }
             }
 
             file.Close();
 
-            return cmdList;
+            return commandBlocks;
         }
     }
 }
