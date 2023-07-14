@@ -88,15 +88,15 @@ namespace RobotSimulator
         {
             if (_tabletop.IsValidPosition(x, y))
             {
-                _robot.X = x;
-                _robot.Y = y;
-                _robot.Facing = facing;
+                _robot.SetX(x);
+                _robot.SetY(y);
+                _robot.SetFacing( facing); 
             }
         }
 
         private void MoveRobot()
         {
-            if (_tabletop.IsValidPosition(_robot.X, _robot.Y))
+            if (_tabletop.IsValidPosition(_robot.GetX(), _robot.GetY()))
             {
                 _robot.Move();
             }

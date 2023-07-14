@@ -6,7 +6,7 @@
         {
             Console.WriteLine("Hello, World!");
 
-            RobotSimulator simulator = new RobotSimulator(new Robot(), new Tabletop());
+            RobotSimulator simulator = new RobotSimulator(new Robot(0, 0, "NORTH"), new Tabletop());
             string filePath = "commands.txt"; // Path to the commands file
 
             simulator.ProcessCommands(filePath);

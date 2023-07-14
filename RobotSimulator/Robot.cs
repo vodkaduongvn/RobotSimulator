@@ -8,38 +8,45 @@ namespace RobotSimulator
 {
     public interface IRobot
     {
-        public int X { get; set; }
-        public int Y { get; set; }
-        public string Facing { get; set; }
-
         void Move();
         void RotateLeft();
         void RotateRight();
         void Report();
+        int GetY();
+        int GetX();
+        void SetX(int x);
+        void SetY(int y);
+        void SetFacing(string facing);
     }
 
     public class Robot: IRobot
     {
-        public int X { get; set; }
-        public int Y { get; set; }
-        public string Facing { get; set; }
+        private int _x, _y;
+        private string _facing;
+
+        public Robot(int x, int y, string facing)
+        {
+            _x = x;
+            _y = y;
+            _facing = facing;
+        }
 
         public void Move()
         {
             // Update the coordinates based on the current facing direction
-            switch (Facing)
+            switch (_facing)
             {
                 case "NORTH":
-                    Y = Math.Min(Y + 1, 4);
+                    _y = Math.Min(_y + 1, 4);
                     break;
                 case "SOUTH":
-                    Y = Math.Max(Y - 1, 0);
+                    _y = Math.Max(_y - 1, 0);
                     break;
                 case "EAST":
-                    X = Math.Min(X + 1, 4);
+                    _x = Math.Min(_x + 1, 4);
                     break;
                 case "WEST":
-                    X = Math.Max(X - 1, 0);
+                    _x = Math.Max(_x - 1, 0);
                     break;
             }
         }
@@ -47,19 +54,19 @@ namespace RobotSimulator
         public void RotateLeft()
         {
             // Rotate the robot 90 degrees to the left
-            switch (Facing)
+            switch (_facing)
             {
                 case "NORTH":
-                    Facing = "WEST";
+                    _facing = "WEST";
                     break;
                 case "SOUTH":
-                    Facing = "EAST";
+                    _facing = "EAST";
                     break;
                 case "EAST":
-                    Facing = "NORTH";
+                    _facing = "NORTH";
                     break;
                 case "WEST":
-                    Facing = "SOUTH";
+                    _facing = "SOUTH";
                     break;
             }
         }
@@ -67,26 +74,50 @@ namespace RobotSimulator
         public void RotateRight()
         {
             // Rotate the robot 90 degrees to the right
-            switch (Facing)
+            switch (_facing)
             {
                 case "NORTH":
-                    Facing = "EAST";
+                    _facing = "EAST";
                     break;
                 case "SOUTH":
-                    Facing = "WEST";
+                    _facing = "WEST";
                     break;
                 case "EAST":
-                    Facing = "SOUTH";
+                    _facing = "SOUTH";
                     break;
                 case "WEST":
-                    Facing = "NORTH";
+                    _facing = "NORTH";
                     break;
             }
         }
 
         public void Report()
         {
-            Console.WriteLine($"Output: {X},{Y},{Facing}");
+            Console.WriteLine($"Output: {_x},{_y},{_facing}");
+        }
+
+        public int GetX()
+        {
+            return _x;
+        }
+
+        public int GetY()
+        {
+            return _y;
+        }
+
+        public void SetX(int x)
+        {
+            _x = x;
+        }
+
+        public void SetY(int y)
+        {
+            _y = y;
+        }
+        public void SetFacing(string facing)
+        {
+            _facing=facing;
         }
     }
   
