@@ -6,17 +6,17 @@ Runing CMD at the Application folder then run: dotnet build and dotnet run to ru
 
 The commands.txt including some scenarios for testing.
 
-NOTE: 
+NOTEs: 
   The commands in the file are isolated by break line, one block command is for each of scenario test.
 
-  As the Requirements, break down Scenarios:
+  As the Requirements, break down scenarios:
         
         Successful: input fully, MOVE not exceed 5
             PLACE 0,0,NORTH
             MOVE
             REPORT
 
-        Successful: input fully, facing NORTH, MOVE forward (6) exceed 5 then stop at top
+        Successful: input fully, facing NORTH, MOVE forward (6) exceed 5 then stop at top to prevent robot falling from the table
             PLACE 0,0,NORTH
             MOVE
             MOVE
@@ -26,7 +26,7 @@ NOTE:
             MOVE
             REPORT
             
-        Successful: input fully, facing NORTH, MOVE forward (6) exceed 5 then stop at top, rotate RIGHT keep moving not exceed 5
+        Successful: input fully, facing NORTH, MOVE forward (6) exceed 5 then stop at top to prevent robot falling from the table, rotate RIGHT keep moving not exceed 5
             PLACE 0,0,NORTH
             MOVE
             MOVE
@@ -36,6 +36,24 @@ NOTE:
             MOVE
             REPORT
             RIGHT
+            MOVE
+            MOVE
+            REPORT
+
+        Successful: input fully, facing NORTH, MOVE forward (6) exceed 5 then stop at top, rotate RIGHT keep moving exceed 5 then stop at top to prevent robot falling from the table
+            PLACE 0,0,NORTH
+            MOVE
+            MOVE
+            MOVE
+            MOVE
+            MOVE
+            MOVE
+            REPORT
+            RIGHT
+            MOVE
+            MOVE
+            MOVE
+            MOVE
             MOVE
             MOVE
             REPORT

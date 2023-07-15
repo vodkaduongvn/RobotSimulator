@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace RobotSimulator
+﻿namespace RobotSimulator
 {
     public class RobotSimulator
     {
@@ -155,7 +149,7 @@ namespace RobotSimulator
                 line = line.Trim();
                 //if line is empty
                 // parse line to model
-                if (line == "")
+                if (string.IsNullOrEmpty(line))
                 {
                     var cmdBlock = new CommandBlock();
                     if (!string.IsNullOrEmpty(str))
