@@ -9,7 +9,7 @@ The commands.txt including some scenarios for testing.
 NOTE: 
   The commands in the file are isolated by break line, one block command is for each of scenario test.
 
-    Scenarios:
+  As the Requirements, break down Scenarios:
         
         Successful: input fully, MOVE not exceed 5
             PLACE 0,0,NORTH
@@ -34,7 +34,26 @@ NOTE:
             MOVE
             MOVE
             MOVE
+            REPORT
             RIGHT
+            MOVE
+            MOVE
+            REPORT
+
+       Successful: input fully, facing NORTH, loop MOVE around table not exceed 5
+            PLACE 0,0,NORTH
+            MOVE
+            MOVE
+            MOVE
+            MOVE
+            MOVE
+            REPORT
+            RIGHT
+            MOVE
+            MOVE
+            REPORT
+            LEFT
+            MOVE
             MOVE
             REPORT
 
