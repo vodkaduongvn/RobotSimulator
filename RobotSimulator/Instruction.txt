@@ -10,12 +10,34 @@ NOTE:
   The commands in the file are isolated by break line, one block command is for each of scenario test.
 
     Scenarios:
-
-        Successful: input fully
+        
+        Successful: input fully, MOVE not exceed 5
             PLACE 0,0,NORTH
             MOVE
             REPORT
+
+        Successful: input fully, facing NORTH, MOVE forward (6) exceed 5 then stop at top
+            PLACE 0,0,NORTH
+            MOVE
+            MOVE
+            MOVE
+            MOVE
+            MOVE
+            MOVE
+            REPORT
             
+        Successful: input fully, facing NORTH, MOVE forward (6) exceed 5 then stop at top, rotate RIGHT keep moving not exceed 5
+            PLACE 0,0,NORTH
+            MOVE
+            MOVE
+            MOVE
+            MOVE
+            MOVE
+            MOVE
+            RIGHT
+            MOVE
+            REPORT
+
         Fail: missing PLACE command
             MOVE
             REPORT

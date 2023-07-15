@@ -19,7 +19,7 @@ namespace RobotSimulator
 
         public void ProcessCommands(string filePath)
         {
-            var commandBlocks = ParseCommandFileToCommandBlocksModel(filePath);
+            var commandBlocks = ParseCommandsFileToCommandBlocksModel(filePath);
 
             foreach (var cmdBlock in commandBlocks)
             {
@@ -32,10 +32,6 @@ namespace RobotSimulator
                         if (!string.IsNullOrEmpty(command.Type))
                         {
                             Console.WriteLine($"Invalid command {command.Type}. PLACE command must be executed first.");
-                        }
-                        else
-                        {
-                            Console.WriteLine($"PLACE command was empty.");
                         }
                         break;
                     }
@@ -133,7 +129,7 @@ namespace RobotSimulator
             _robot.Report();
         }
 
-        private List<CommandBlock> ParseCommandFileToCommandBlocksModel(string fileName)
+        private List<CommandBlock> ParseCommandsFileToCommandBlocksModel(string fileName)
         {
             var str = "";
 
