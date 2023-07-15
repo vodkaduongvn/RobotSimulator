@@ -57,7 +57,7 @@ NOTE:
             MOVE
             REPORT
 
-        Fail: missing PLACE command
+        Fail: missing PLACE command, A robot that is not on the table can choose to ignore the MOVE, LEFT, RIGHT and REPORT commands
             MOVE
             REPORT
         

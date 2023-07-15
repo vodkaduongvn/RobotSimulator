@@ -25,21 +25,28 @@ namespace RobotSimulator
             {
                 var isValidCommand = false;
 
-                foreach (var command in cmdBlock.Commands) 
+                if (cmdBlock.Commands.Any(x => x.Type.Contains("PLACE")))
                 {
-                    if (command.Type != "PLACE" && !isValidCommand)
+                    foreach (var command in cmdBlock.Commands)
                     {
-                        if (!string.IsNullOrEmpty(command.Type))
+                        if (command.Type != "PLACE" && !isValidCommand)
                         {
-                            Console.WriteLine($"Invalid command {command.Type}. PLACE command must be executed first.");
+                            if (!string.IsNullOrEmpty(command.Type))
+                            {
+                                Console.WriteLine($"Invalid command {command.Type}. PLACE command must be executed first.");
+                            }
+                            break;
                         }
-                        break;
+                        else
+                        {
+                            isValidCommand = true;
+                            ExecuteCommand(command);
+                        }
                     }
-                    else
-                    {
-                        isValidCommand = true;
-                        ExecuteCommand(command);
-                    }
+                }
+                else // A robot that is not on the table can choose to ignore the MOVE, LEFT, RIGHT and REPORT commands
+                {
+                    Console.WriteLine($"A robot that is not on the table can choose to ignore the MOVE, LEFT, RIGHT and REPORT commands");
                 }
             }
         }
