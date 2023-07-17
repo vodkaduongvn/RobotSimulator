@@ -23,11 +23,11 @@
                 {
                     foreach (var command in cmdBlock.Commands)
                     {
-                        if (command.Type != "PLACE" && !isValidCommand)
+                        if ((command.Type != "PLACE" || !_tabletop.IsValidPosition(command.X, command.Y)) && !isValidCommand)
                         {
                             if (!string.IsNullOrEmpty(command.Type))
                             {
-                                Console.WriteLine($"Invalid command {command.Type}. PLACE command must be executed first.");
+                                Console.WriteLine($"Invalid command {command.Type} X:{command.X} Y:{command.Y}. the correct PLACE command must be executed first.");
                             }
                             break;
                         }
