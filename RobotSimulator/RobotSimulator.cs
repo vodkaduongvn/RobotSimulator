@@ -40,7 +40,7 @@
                 }
                 else // A robot that is not on the table can choose to ignore the MOVE, LEFT, RIGHT and REPORT commands
                 {
-                    Console.WriteLine($"A robot that is not on the table can choose to ignore the MOVE, LEFT, RIGHT and REPORT commands");
+                    Console.WriteLine($"missing PLACE command, A robot that is not on the table can choose to ignore the MOVE, LEFT, RIGHT and REPORT commands");
                 }
             }
         }
